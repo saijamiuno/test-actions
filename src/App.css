@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+.sider-menu {
+  background-color: #003c75;
+  max-width: 200px;
+  color: #ffffff;
+  margin-top: 2.81rem;
+  position: fixed;
+}
+.ant-menu-submenu-title {
+  color: #fff;
+}
+.buttons {
+  border-radius: 10px;
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 1rem;
+  background-color: rgb(53, 201, 217);
+}
+.form {
+  border-radius: 5px;
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 0.2rem;
+  background-color: rgba(53, 154, 217, 0.777);
+}
+.inputForm {
+  background-color: #818181;
+}
+.objects{
+  padding: 3rem;
+}
