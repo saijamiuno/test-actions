@@ -36,6 +36,7 @@ function Persons() {
       ))}
 
       <button
+        style={{ marginBottom: "80px" }}
         onClick={() => {
           showFruit();
         }}
