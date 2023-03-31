@@ -4,6 +4,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import Lottie from "react-lottie";
 import { Form, Input, Button, DatePicker, TreeSelect, Upload } from "antd";
 import googleLoading from "./googleLoading.json";
+import moment from "moment";
 // import cycle from "./cycle.json";
 
 // const { Header, Footer, Sider, Content } = Layout;
@@ -19,26 +20,45 @@ export default function Form1() {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  const onSubmitForm = async (values) => {
+    let data = {
+      entityData: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        gender: values.gender,
+        designation: values.designation,
+        phone: values.phone,
+        dob: moment(values.dob).format("DD/MM/YYYY"),
+        comments: values.comments,
+        dataType: "form",
+      },
+    };
+    console.log(data, "data");
+  };
+
   return (
     <div>
       <Form
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
         layout="horizontal"
+        onFinish={onSubmitForm}
       >
         <br />
-        <Form.Item label="First Name ">
+        <Form.Item name="firstName" label="First Name ">
           <Input />
         </Form.Item>
-        <Form.Item label="Last Name ">
+        <Form.Item name="lastName" label="Last Name ">
           <Input />
         </Form.Item>
 
-        <Form.Item label="Email ID">
+        <Form.Item name="email" label="Email ID">
           <Input type="email" />
         </Form.Item>
 
-        <Form.Item label="Gender">
+        <Form.Item name="gender" label="Gender">
           <TreeSelect
             treeData={[
               {
@@ -53,7 +73,7 @@ export default function Form1() {
           />
         </Form.Item>
 
-        <Form.Item label="Designation">
+        <Form.Item name="designation" label="Designation">
           <TreeSelect
             treeData={[
               {
@@ -91,12 +111,12 @@ export default function Form1() {
             ]}
           />
         </Form.Item>
-        <Form.Item label="Mobile Phone">
+        <Form.Item name="phone" label="Mobile Phone">
           <Input type="number" />
         </Form.Item>
 
-        <Form.Item label="Date of Birth">
-          <DatePicker />
+        <Form.Item name="dob" label="Date of Birth">
+          <DatePicker format="DD/MM/YYYY" />
         </Form.Item>
         {show && (
           <Lottie
@@ -104,22 +124,24 @@ export default function Form1() {
             style={{ width: "200px", heigth: "200px" }}
           />
         )}
-        <Form.Item label="TextArea">
+        <Form.Item name="comments" label="Comments">
           <TextArea rows={4} />
         </Form.Item>
 
-        <Form.Item label="Upload" valuePropName="fileList">
+        {/* <Form.Item label="Upload" valuePropName="fileList">
           <Upload action="/upload.do" listType="picture-card">
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}>Upload</div>
             </div>
           </Upload>
-        </Form.Item>
+        </Form.Item> */}
 
         <center>
           <Form.Item>
-            <Button style={{ width: "144px" }}>Submit</Button>
+            <Button type="submit" htmlType="submit" style={{ width: "144px" }}>
+              Submit
+            </Button>
             <Button onClick={() => setShow(!show)} style={{ width: "144px" }}>
               Show Animation
             </Button>
