@@ -50,7 +50,6 @@ export default function Form1() {
 
   const onResetValues = () => {
     document.getElementById("myForm").reset();
-   
   };
 
   const onSubmitForm = async (values) => {
