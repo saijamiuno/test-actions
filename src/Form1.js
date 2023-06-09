@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
+import axios from "axios";
+
 
 import Lottie from "react-lottie";
 import { Form, Input, Button, DatePicker, TreeSelect, Upload } from "antd";
@@ -21,22 +23,55 @@ export default function Form1() {
     },
   };
 
-  const onSubmitForm = async (values) => {
-    let data = {
-      entityData: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        gender: values.gender,
-        designation: values.designation,
-        phone: values.phone,
-        dob: moment(values.dob).format("DD/MM/YYYY"),
-        comments: values.comments,
-        dataType: "form",
-      },
-    };
-    console.log(data, "data");
+  // const onSubmitForm = async (values) => {
+
+  //   const res = await fetch("/post", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       firstName: values.firstName,
+  //       lastName: values.lastName,
+  //       email: values.email,
+  //       gender: values.gender,
+  //       designation: values.designation,
+  //       phone: values.phone,
+  //       dob: moment(values.dob).format("DD/MM/YYYY"),
+  //       comments: values.comments,
+  //       dataType: "form",
+  //     }),
+  //   });
+  //   // const response = await res.json();
+  //   // if (res.status) {
+  //   //   console.log("Sucess");
+  //   // } else {
+  //   //   console.log("error");
+  //   // }
+  //   // console.log( "data");
+  // };
+
+  const onResetValues = () => {
+    document.getElementById("myForm").reset();
   };
+
+  const onSubmitForm = async (values) => {
+  const response = await axios.post("/post", {
+    firstName: values.firstName,
+    lastName: values.lastName,
+    email: values.email,
+    gender: values.gender,
+    designation: values.designation,
+    phone: values.phone,
+    dob: moment(values.dob).format("DD/MM/YYYY"),
+    comments: values.comments,
+    dataType: "form",
+  });
+  if (response.status === 200) {
+    alert("Your Response is Saved!!!!!!!!!")
+    onResetValues()
+  } else {
+    alert("Data Not Submited")
+  }
+  console.log(response.data);
+};
 
   return (
     <div>
@@ -45,6 +80,7 @@ export default function Form1() {
         wrapperCol={{ span: 14 }}
         layout="horizontal"
         onFinish={onSubmitForm}
+        id="myForm"
       >
         <br />
         <Form.Item name="firstName" label="First Name ">
