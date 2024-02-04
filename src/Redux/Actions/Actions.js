@@ -1,0 +1,4 @@
+const SELECTED_FRUITS = "SELECTED_FRUITS";
+
+
+
